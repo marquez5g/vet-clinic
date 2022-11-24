@@ -25,12 +25,23 @@ public class ClinicService {
         this.petRepository = petRepository;
     }
 
+    /**
+     * Guarda una clínica luego de convertir su Dto a la entidad.
+     * @param clinicDto la clínica de tipo Dto.
+     * @return la clínica guardada.
+     */
     public ClinicDto save(ClinicDto clinicDto) {
         Clinic clinic = objectMapper.convertValue(clinicDto, Clinic.class);
         Clinic savedClinic = clinicRepository.save(clinic);
         return objectMapper.convertValue(savedClinic, ClinicDto.class);
     }
 
+    /**
+     * Buscar una clínica por id usando su repositorio. Recibe un Optional de la base de datos, revisa si está presente
+     * y lo obtiene en el caso que exista.
+     * @param id el id de la clínica
+     * @return la clínica.
+     */
     public ClinicDto findById(Long id) {
         Optional<Clinic> clinicOptional = clinicRepository.findById(id);
         Clinic clinic = new Clinic();
