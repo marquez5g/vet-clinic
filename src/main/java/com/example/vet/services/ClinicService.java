@@ -44,10 +44,7 @@ public class ClinicService {
      */
     public ClinicDto findById(Long id) {
         Optional<Clinic> clinicOptional = clinicRepository.findById(id);
-        Clinic clinic = new Clinic();
-        if (clinicOptional.isPresent()) {
-            clinic = clinicOptional.get();
-        }
+        Clinic clinic = clinicOptional.orElse(null);
         return objectMapper.convertValue(clinic, ClinicDto.class);
     }
 
