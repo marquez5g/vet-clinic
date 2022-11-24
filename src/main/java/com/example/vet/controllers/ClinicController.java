@@ -35,8 +35,12 @@ public class ClinicController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<ClinicDto> getClinic(@PathVariable Long id) {
+        ResponseEntity<ClinicDto> response = ResponseEntity.notFound().build();
         ClinicDto clinicDto = clinicService.findById(id);
-        return ResponseEntity.ok().body(clinicDto);
+        if (clinicDto != null) {
+            response = ResponseEntity.ok().body(clinicDto);
+        }
+        return response;
     }
 
     /**
